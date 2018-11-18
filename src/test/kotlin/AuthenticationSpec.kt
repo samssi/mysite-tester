@@ -9,6 +9,7 @@ import io.kotlintest.specs.BehaviorSpec
 internal class AuthenticationSpec : BehaviorSpec({
     given("Login attempt") {
         val unauthorizedDescription = "Unauthorized(401) and empty token returned"
+        val authorizedDescription = "OK(200) and token returned"
 
         `when` ("empty username and password") {
             then(unauthorizedDescription) {
@@ -39,14 +40,14 @@ internal class AuthenticationSpec : BehaviorSpec({
         }
 
         `when` ("username correct and password correct for foobar") {
-            then(unauthorizedDescription) {
+            then(authorizedDescription) {
                 val (response, token) = postAuth(usernameCorrectPasswordCorrectForFoobar)
                 assertAuthorized(response, token)
             }
         }
 
         `when` ("username correct and password correct for baz") {
-            then(unauthorizedDescription) {
+            then(authorizedDescription) {
                 val (response, token) = postAuth(usernameCorrectPasswordCorrectForBaz)
                 assertAuthorized(response, token)
             }

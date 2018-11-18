@@ -7,7 +7,7 @@ import io.kotlintest.shouldNotBe
 import io.kotlintest.specs.BehaviorSpec
 
 internal class AuthenticationSpec : BehaviorSpec({
-    given("com.samssi.mysite.Login attempt") {
+    given("Login attempt") {
         val unauthorizedDescription = "Unauthorized(401) and empty token returned"
         val authorizedDescription = "OK(200) and token returned"
 

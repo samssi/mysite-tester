@@ -1,3 +1,5 @@
+package com.samssi.mysite
+
 import com.github.kittinunf.fuel.core.Response
 import com.google.gson.Gson
 

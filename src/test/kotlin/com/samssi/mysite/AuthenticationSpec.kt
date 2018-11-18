@@ -1,13 +1,13 @@
+package com.samssi.mysite
+
 import com.github.kittinunf.fuel.core.Response
-import com.github.kittinunf.fuel.httpGet
 import com.github.kittinunf.fuel.httpPost
-import com.google.gson.Gson
 import io.kotlintest.shouldBe
 import io.kotlintest.shouldNotBe
 import io.kotlintest.specs.BehaviorSpec
 
 internal class AuthenticationSpec : BehaviorSpec({
-    given("Login attempt") {
+    given("com.samssi.mysite.Login attempt") {
         val unauthorizedDescription = "Unauthorized(401) and empty token returned"
         val authorizedDescription = "OK(200) and token returned"
 

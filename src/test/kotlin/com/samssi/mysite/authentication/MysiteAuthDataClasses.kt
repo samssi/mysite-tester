@@ -1,8 +1,9 @@
-package com.samssi.mysite
+package com.samssi.mysite.authentication
 
 val emptyUserLogin = Login("", "")
 val usernameCorrectPasswordIncorrect = Login("foobar", "bazboz")
-val usernameInCorrectPasswordCorrectToSomeOtherUserPassword = Login("someuser", "logal")
+val usernameInCorrectPasswordCorrectToSomeOtherUserPassword =
+    Login("someuser", "logal")
 val usernameCorrectPasswordCorrectToSomeOtherUser = Login("baz", "logal")
 
 val usernameCorrectPasswordCorrectForFoobar = Login("foobar", "logal")

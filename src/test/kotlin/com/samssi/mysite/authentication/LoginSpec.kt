@@ -1,7 +1,9 @@
-package com.samssi.mysite
+package com.samssi.mysite.authentication
 
 import com.github.kittinunf.fuel.core.Response
 import com.github.kittinunf.fuel.httpPost
+import com.samssi.mysite.JsonUtil
+import com.samssi.mysite.TestContainerSpec
 import io.kotlintest.shouldBe
 import io.kotlintest.shouldNotBe
 import io.kotlintest.specs.BehaviorSpec

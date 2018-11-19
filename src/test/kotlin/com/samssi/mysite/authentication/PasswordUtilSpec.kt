@@ -4,7 +4,7 @@ import com.github.kittinunf.fuel.httpPost
 import com.google.gson.Gson
 import com.samssi.mysite.JsonUtil.jsonResponseAsType
 import com.samssi.mysite.TestContainerSpec.authUrl
-import io.kotlintest.shouldEqual
+import io.kotlintest.shouldBe
 import io.kotlintest.specs.BehaviorSpec
 
 internal class PasswordUtilSpec : BehaviorSpec({
@@ -15,13 +15,13 @@ internal class PasswordUtilSpec : BehaviorSpec({
         `when`("Invalid empty body provided") {
             then(badRequestResponse) {
                 val (_, response, _ ) = passwordUtilUrl.httpPost().jsonBody("{}").response()
-                response.statusCode shouldEqual 400
+                response.statusCode shouldBe 400
             }
         }
         `when`("Invalid json body provided") {
             then(badRequestResponse) {
-                val (_, response, _ ) = passwordUtilUrl.httpPost().jsonBody(Gson().toJson(InvalidPasswordClass("12345"))).response()
-                response.statusCode shouldEqual 400
+                val (_, response, _ ) = passwordUtilUrl.httpPost().jsonBody(Gson().toJson(Invalid("12345"))).response()
+                response.statusCode shouldBe 400
             }
         }
         `when`("Valid password requested") {
@@ -30,9 +30,9 @@ internal class PasswordUtilSpec : BehaviorSpec({
                 val passwordAndSalt = jsonResponseAsType<PasswordAndSalt>(response)
                 val requiredPasswordOrSaltLength = 1024
 
-                response.statusCode shouldEqual 200
-                passwordAndSalt.password.length shouldEqual requiredPasswordOrSaltLength
-                passwordAndSalt.salt.length shouldEqual requiredPasswordOrSaltLength
+                response.statusCode shouldBe 200
+                passwordAndSalt.password.length shouldBe requiredPasswordOrSaltLength
+                passwordAndSalt.salt.length shouldBe requiredPasswordOrSaltLength
             }
         }
     }

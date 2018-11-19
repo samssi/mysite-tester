@@ -1,5 +1,7 @@
-package com.samssi.mysite
+package com.samssi.mysite.testcontainer
 
+import com.samssi.mysite.AuthSettings
+import com.samssi.mysite.KGenericContainer
 import org.testcontainers.containers.GenericContainer
 
 internal object MysiteAuthContainerSpec {

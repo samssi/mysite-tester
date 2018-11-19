@@ -4,7 +4,7 @@ import com.github.kittinunf.fuel.core.Response
 import com.github.kittinunf.fuel.httpPost
 import com.google.gson.Gson
 import com.samssi.mysite.JsonUtil
-import com.samssi.mysite.MysiteAuthContainerSpec
+import com.samssi.mysite.testcontainer.MysiteAuthContainerSpec
 import io.kotlintest.shouldBe
 import io.kotlintest.shouldNotBe
 import io.kotlintest.specs.BehaviorSpec

@@ -24,4 +24,9 @@ internal object ValidationUtil {
         val regex = "(http://|https://)[a-z0-9-./]*".toRegex()
         return regex.matches(github)
     }
+
+    internal fun isYearValid(year: String): Boolean {
+        val regex = "[1,2][0,9][0-9]{2}".toRegex()
+        return regex.matches(year)
+    }
 }

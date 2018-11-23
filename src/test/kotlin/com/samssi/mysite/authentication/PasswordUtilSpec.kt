@@ -2,7 +2,7 @@ package com.samssi.mysite.authentication
 
 import com.github.kittinunf.fuel.httpPost
 import com.google.gson.Gson
-import com.samssi.mysite.JsonUtil.jsonResponseAsType
+import com.samssi.mysite.util.JsonUtil.jsonResponseAsType
 import com.samssi.mysite.testcontainer.MysiteAuthContainerSpec.authUrl
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.BehaviorSpec

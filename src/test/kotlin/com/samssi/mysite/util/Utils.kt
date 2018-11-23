@@ -1,4 +1,4 @@
-package com.samssi.mysite
+package com.samssi.mysite.util
 
 import com.github.kittinunf.fuel.core.Response
 import com.google.gson.Gson

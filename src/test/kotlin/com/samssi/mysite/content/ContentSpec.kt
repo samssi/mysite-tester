@@ -2,9 +2,9 @@ package com.samssi.mysite.content
 
 import com.github.kittinunf.fuel.core.Response
 import com.github.kittinunf.fuel.httpGet
-import com.samssi.mysite.JsonUtil.jsonResponseAsType
-import com.samssi.mysite.ValidationUtil.isOrderValid
-import com.samssi.mysite.ValidationUtil.isUrlValid
+import com.samssi.mysite.util.JsonUtil.jsonResponseAsType
+import com.samssi.mysite.util.ValidationUtil.isOrderValid
+import com.samssi.mysite.util.ValidationUtil.isUrlValid
 import com.samssi.mysite.authentication.Message
 import com.samssi.mysite.authentication.postAuth
 import com.samssi.mysite.authentication.usernameCorrectPasswordCorrectForFoobar

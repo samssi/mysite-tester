@@ -1,6 +1,6 @@
 package com.samssi.mysite.testcontainer
 
-import com.samssi.mysite.KGenericContainer
+import com.samssi.mysite.util.KGenericContainer
 import com.samssi.mysite.Settings
 import org.testcontainers.containers.GenericContainer
 

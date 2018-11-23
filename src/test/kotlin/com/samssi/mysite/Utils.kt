@@ -11,3 +11,18 @@ internal object JsonUtil {
 }
 
 internal class KGenericContainer(imageName: String) : GenericContainer<KGenericContainer>(imageName)
+
+internal object ValidationUtil {
+    internal fun isPhoneNumberValid(phoneNumber: String): Boolean {
+        val regex = "^(\\+|0)?[0-9]*".toRegex()
+        return regex.matches(phoneNumber)
+    }
+
+    internal fun isOrderValid(order: Int): Boolean { return order > -1 }
+
+    // TODO: fix me!
+    internal fun isUrlValid(github: String): Boolean {
+        val regex = "^(http://|https://)?[a-z0-9.-/]*".toRegex()
+        return regex.containsMatchIn(github)
+    }
+}

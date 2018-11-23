@@ -3,6 +3,8 @@ package com.samssi.mysite.content
 import com.github.kittinunf.fuel.core.Response
 import com.github.kittinunf.fuel.httpGet
 import com.samssi.mysite.JsonUtil.jsonResponseAsType
+import com.samssi.mysite.ValidationUtil.isOrderValid
+import com.samssi.mysite.ValidationUtil.isUrlValid
 import com.samssi.mysite.authentication.Message
 import com.samssi.mysite.authentication.postAuth
 import com.samssi.mysite.authentication.usernameCorrectPasswordCorrectForFoobar
@@ -43,7 +45,7 @@ internal class ContentSpec : BehaviorSpec({
                 about.services.forEach{service ->
                     service.description.length shouldBeGreaterThan 0
                     service.title.length shouldBeGreaterThan 0
-                    isUrl(service.github) shouldBe true
+                    isUrlValid(service.github) shouldBe true
                 }
             }
         }
@@ -91,7 +93,7 @@ internal class ContentSpec : BehaviorSpec({
                 response.statusCode shouldBe 200
                 experienceDocs.forEach { experience ->
                     experience.header.length shouldBeGreaterThanOrEqual 0
-                    orderValid(experience.order) shouldBe true
+                    isOrderValid(experience.order) shouldBe true
                     experience.blocks.forEach{block ->
                         block.content.length shouldBeGreaterThan 0
                         block.title.length shouldBeGreaterThanOrEqual 0
@@ -107,7 +109,7 @@ internal class ContentSpec : BehaviorSpec({
                 response.statusCode shouldBe 200
 
                 portfolioDocs.forEach {portfolio ->
-                    orderValid(portfolio.order) shouldBe true
+                    isOrderValid(portfolio.order) shouldBe true
                     portfolio.company.length shouldBeGreaterThanOrEqual 0
                     checkAssignments(portfolio.assignments)
                 }
@@ -130,19 +132,6 @@ fun checkAssignments(assignments: List<Assignments>) {
             paragraph.paragraph.length shouldBeGreaterThan 0
         }
     }
-}
-
-fun isPhoneNumber(phoneNumber: String): Boolean {
-    val regex = "^(\\+|0)?[0-9]*".toRegex()
-    return regex.matches(phoneNumber)
-}
-
-fun orderValid(order: Int): Boolean { return order > -1 }
-
-// TODO: fix me!
-fun isUrl(github: String): Boolean {
-    val regex = "^(http://|https://)?[a-z0-9.-/]*".toRegex()
-    return regex.containsMatchIn(github)
 }
 
 fun authorizedContentGet(url: String): Response {

@@ -8,11 +8,11 @@ import com.samssi.mysite.authentication.postAuth
 import com.samssi.mysite.authentication.usernameCorrectPasswordCorrectForFoobar
 import com.samssi.mysite.testcontainer.MysiteRestTestContainer
 import io.kotlintest.matchers.numerics.shouldBeGreaterThan
+import io.kotlintest.matchers.numerics.shouldBeGreaterThanOrEqual
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.BehaviorSpec
-import kotlin.reflect.full.memberProperties
 
-internal class AboutSpec : BehaviorSpec({
+internal class ContentSpec : BehaviorSpec({
     val documents = listOf("application", "about", "personal", "experience", "portfolio", "about")
     given("User calls for any content api private route") {
         `when`("no token in header") {
@@ -34,7 +34,17 @@ internal class AboutSpec : BehaviorSpec({
                 val about = jsonResponseAsType<About>(response)
 
                 response.statusCode shouldBe 200
-                assertContentResponse(about)
+
+                about.header.length shouldBeGreaterThan 0
+                about.description.length shouldBeGreaterThan 0
+                about.technologies.forEach{technology ->
+                    technology.length shouldBeGreaterThan 0
+                }
+                about.services.forEach{service ->
+                    service.description.length shouldBeGreaterThan 0
+                    service.title.length shouldBeGreaterThan 0
+                    isUrl(service.github) shouldBe true
+                }
             }
         }
         `when` (contentApiDocumentDescriptionText("application")) {
@@ -43,11 +53,97 @@ internal class AboutSpec : BehaviorSpec({
                 val application = jsonResponseAsType<Application>(response)
 
                 response.statusCode shouldBe 200
-                assertContentResponse(application)
+
+                application.greeting.length shouldBeGreaterThan 0
+                application.signature.length shouldBeGreaterThan 0
+                application.signatureTitle.length shouldBeGreaterThan 0
+                application.paragraphs.forEach{ paragraph ->
+                    paragraph.paragraph.length shouldBeGreaterThan 0
+                }
+            }
+        }
+        `when` (contentApiDocumentDescriptionText("personalInfo")) {
+            then("""PersonalInfo document is returned""") {
+                val response = authorizedContentGet(documentUrl("personal"))
+                val personalInfo = jsonResponseAsType<PersonalInfo>(response)
+
+                response.statusCode shouldBe 200
+
+                personalInfo.title.length shouldBeGreaterThan 0
+                personalInfo.name.length shouldBeGreaterThan 0
+                //TODO:
+                //isPhoneNumber(personalInfo.phoneNumber) shouldBe true
+                personalInfo.applicationDate.length shouldBeGreaterThan 0
+                // TODO:
+                //isAllowedPictureFormat(personalInfo.picture) shouldEqual true
+                personalInfo.address.city.length shouldBeGreaterThan 0
+                personalInfo.address.street.length shouldBeGreaterThan 0
+                // TODO:
+                //isZipCode(personalInfo.address.zipcode) shouldEqual true
+            }
+        }
+
+        `when` (contentApiDocumentDescriptionText("experience")) {
+            then("""Experience document is returned""") {
+                val response = authorizedContentGet(documentUrl("experience"))
+                val experienceDocs = jsonResponseAsType<Array<Experience>>(response)
+
+                response.statusCode shouldBe 200
+                experienceDocs.forEach { experience ->
+                    experience.header.length shouldBeGreaterThanOrEqual 0
+                    orderValid(experience.order) shouldBe true
+                    experience.blocks.forEach{block ->
+                        block.content.length shouldBeGreaterThan 0
+                        block.title.length shouldBeGreaterThanOrEqual 0
+                    }
+                }
+            }
+        }
+        `when` (contentApiDocumentDescriptionText("portfolio")) {
+            then("""Portfolio document is returned""") {
+                val response = authorizedContentGet(documentUrl("portfolio"))
+                val portfolioDocs = jsonResponseAsType<Array<Portfolio>>(response)
+
+                response.statusCode shouldBe 200
+
+                portfolioDocs.forEach {portfolio ->
+                    orderValid(portfolio.order) shouldBe true
+                    portfolio.company.length shouldBeGreaterThanOrEqual 0
+                    checkAssignments(portfolio.assignments)
+                }
+
+
             }
         }
     }
 })
+
+
+fun checkAssignments(assignments: List<Assignments>) {
+    assignments.forEach {assignment ->
+        // TODO:
+        //isYear(assignment.year) shouldBe true
+        assignment.technologies.forEach {technology ->
+            technology.length shouldBeGreaterThan 0
+        }
+        assignment.paragraphs.forEach {paragraph ->
+            paragraph.paragraph.length shouldBeGreaterThan 0
+        }
+    }
+}
+
+fun isPhoneNumber(phoneNumber: String): Boolean {
+    val regex = "^(\\+|0)?[0-9]*".toRegex()
+    return regex.matches(phoneNumber)
+}
+
+fun orderValid(order: Int): Boolean { return order > -1 }
+
+// TODO: fix me!
+fun isUrl(github: String): Boolean {
+    val regex = "^(http://|https://)?[a-z0-9.-/]*".toRegex()
+    return regex.containsMatchIn(github)
+}
 
 fun authorizedContentGet(url: String): Response {
     val (_, response, _) = url
@@ -59,16 +155,6 @@ fun authorizedContentGet(url: String): Response {
 
 fun contentApiDocumentDescriptionText(document: String): String {
     return "content api responds to the user request for document: $document"
-}
-
-fun assertContentResponse(contentResource: Any) {
-    contentResource::class.memberProperties.forEach{property ->
-        val propertyValue = property.call(contentResource)
-        if (propertyValue is String) {
-            propertyValue.length shouldBeGreaterThan 0
-        }
-
-    }
 }
 
 fun documentUrl(document: String): String {

@@ -22,3 +22,4 @@ data class PasswordAndSalt(val password: String, val salt: String)
 
 // Content classes
 data class Message(val message: String)
+

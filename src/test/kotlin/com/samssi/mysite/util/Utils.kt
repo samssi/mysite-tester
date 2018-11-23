@@ -21,7 +21,7 @@ internal object ValidationUtil {
     internal fun isOrderValid(order: Int): Boolean { return order > -1 }
 
     internal fun isUrlValid(github: String): Boolean {
-        val regex = "(http://|https://)[a-z0-9.-/]*".toRegex()
-        return regex.containsMatchIn(github)
+        val regex = "(http://|https://)[a-z0-9-./]*".toRegex()
+        return regex.matches(github)
     }
 }

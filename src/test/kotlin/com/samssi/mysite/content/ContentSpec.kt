@@ -17,13 +17,13 @@ internal class AboutSpec : BehaviorSpec({
     given("User calls for any content api private route") {
         `when`("no token in header") {
             then("""Forbidden(403) and message "No token provided."""") {
-                AssertDocumentHttpCallForbidden(documents)
+                assertDocumentHttpCallForbidden(documents)
             }
         }
         // TODO: bad request from backend?
         `when`("invalid token in header") {
             then("""Forbidden(403) and message "No token provided."""") {
-                AssertDocumentHttpCallForbiddenWithInvalidToken(documents)
+                assertDocumentHttpCallForbiddenWithInvalidToken(documents)
             }
         }
     }
@@ -80,7 +80,7 @@ fun validTokenFromAuthService(): String {
     val (_, token) = postAuth(usernameCorrectPasswordCorrectForFoobar)
     return token
 }
-fun AssertDocumentHttpCallForbidden(documents: List<String>) {
+fun assertDocumentHttpCallForbidden(documents: List<String>) {
     documents.forEach {document ->
         val response = unauthorizedContentGet(document)
         val message = jsonResponseAsType<Message>(response)
@@ -90,7 +90,7 @@ fun AssertDocumentHttpCallForbidden(documents: List<String>) {
     }
 }
 
-fun AssertDocumentHttpCallForbiddenWithInvalidToken(documents: List<String>) {
+fun assertDocumentHttpCallForbiddenWithInvalidToken(documents: List<String>) {
     documents.forEach {document ->
         val response = invalidTokenContentGet(document)
         val message = jsonResponseAsType<Message>(response)

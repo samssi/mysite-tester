@@ -22,7 +22,7 @@ internal object ValidationUtil {
 
     // TODO: fix me!
     internal fun isUrlValid(github: String): Boolean {
-        val regex = "^(http://|https://)?[a-z0-9.-/]*".toRegex()
+        val regex = "(http://|https://)[a-z0-9.-/]*".toRegex()
         return regex.containsMatchIn(github)
     }
 }

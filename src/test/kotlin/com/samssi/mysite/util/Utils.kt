@@ -14,7 +14,7 @@ internal class KGenericContainer(imageName: String) : GenericContainer<KGenericC
 
 internal object ValidationUtil {
     internal fun isPhoneNumberValid(phoneNumber: String): Boolean {
-        val regex = "^(\\+|0)?[0-9]*".toRegex()
+        val regex = """(\+|0)[0-9]*""".toRegex()
         return regex.matches(phoneNumber)
     }
 

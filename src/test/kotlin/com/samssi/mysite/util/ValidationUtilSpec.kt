@@ -9,8 +9,8 @@ internal class ValidationUtilSpec : BehaviorSpec({
     val emptyString = ""
     val invalidNumericPhoneNumber = "12345"
     val invalidTextContentAsPhoneNumber = "+12344dsad2"
-    val validInternationalFormatPhoneNumber = "+358501234567"
-    val validFinnishPhoneNumber = "0501234567"
+    val validInternationalFormatPhoneNumber = "+358 50 123 4567"
+    val validFinnishPhoneNumber = "050 123 4567"
 
     given("Phone number validation call") {
         `when`("empty string as phone number ($emptyString)") {

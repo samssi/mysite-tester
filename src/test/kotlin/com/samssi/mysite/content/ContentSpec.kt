@@ -2,13 +2,14 @@ package com.samssi.mysite.content
 
 import com.github.kittinunf.fuel.core.Response
 import com.github.kittinunf.fuel.httpGet
-import com.samssi.mysite.util.JsonUtil.jsonResponseAsType
-import com.samssi.mysite.util.ValidationUtil.isOrderValid
-import com.samssi.mysite.util.ValidationUtil.isUrlValid
 import com.samssi.mysite.authentication.Message
 import com.samssi.mysite.authentication.postAuth
 import com.samssi.mysite.authentication.usernameCorrectPasswordCorrectForFoobar
 import com.samssi.mysite.testcontainer.MysiteRestTestContainer
+import com.samssi.mysite.util.JsonUtil.jsonResponseAsType
+import com.samssi.mysite.util.ValidationUtil.isOrderValid
+import com.samssi.mysite.util.ValidationUtil.isPhoneNumberValid
+import com.samssi.mysite.util.ValidationUtil.isUrlValid
 import io.kotlintest.matchers.numerics.shouldBeGreaterThan
 import io.kotlintest.matchers.numerics.shouldBeGreaterThanOrEqual
 import io.kotlintest.shouldBe
@@ -73,8 +74,7 @@ internal class ContentSpec : BehaviorSpec({
 
                 personalInfo.title.length shouldBeGreaterThan 0
                 personalInfo.name.length shouldBeGreaterThan 0
-                //TODO:
-                //isPhoneNumber(personalInfo.phoneNumber) shouldBe true
+                isPhoneNumberValid(personalInfo.phoneNumber) shouldBe true
                 personalInfo.applicationDate.length shouldBeGreaterThan 0
                 // TODO:
                 //isAllowedPictureFormat(personalInfo.picture) shouldEqual true

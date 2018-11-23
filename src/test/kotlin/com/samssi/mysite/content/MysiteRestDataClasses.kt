@@ -17,4 +17,4 @@ data class PersonalInfo(val title: String, val name: String, val address: Addres
 data class Address(val street: String, val zipcode: String, val city: String)
 
 data class Portfolio(val order: Int, val company: String, val assignments: List<Assignments>)
-data class Assignments(val year: String, val paragraphs: List<Paragraphs>, val technologies: List<String>)
+data class Assignments(val year: String?, val paragraphs: List<Paragraphs>, val technologies: List<String>)

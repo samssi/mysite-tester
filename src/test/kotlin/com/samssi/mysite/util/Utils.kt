@@ -26,7 +26,7 @@ internal object ValidationUtil {
     }
 
     internal fun isYearValid(year: String): Boolean {
-        val regex = "[1,2][0,9][0-9]{2}".toRegex()
+        val regex = "(^\$|[1,2][0,9][0-9]{2}-[1,2][0,9][0-9]{2}|[1,2][0,9][0-9]{2})".toRegex()
         return regex.matches(year)
     }
 }

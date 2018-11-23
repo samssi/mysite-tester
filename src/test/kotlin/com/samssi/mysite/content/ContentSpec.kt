@@ -10,6 +10,7 @@ import com.samssi.mysite.util.JsonUtil.jsonResponseAsType
 import com.samssi.mysite.util.ValidationUtil.isOrderValid
 import com.samssi.mysite.util.ValidationUtil.isPhoneNumberValid
 import com.samssi.mysite.util.ValidationUtil.isUrlValid
+import com.samssi.mysite.util.ValidationUtil.isYearValid
 import io.kotlintest.matchers.numerics.shouldBeGreaterThan
 import io.kotlintest.matchers.numerics.shouldBeGreaterThanOrEqual
 import io.kotlintest.shouldBe
@@ -123,8 +124,7 @@ internal class ContentSpec : BehaviorSpec({
 
 fun checkAssignments(assignments: List<Assignments>) {
     assignments.forEach {assignment ->
-        // TODO:
-        //isYear(assignment.year) shouldBe true
+        isYearValid(assignment.year.orEmpty()) shouldBe true
         assignment.technologies.forEach {technology ->
             technology.length shouldBeGreaterThan 0
         }

@@ -11,13 +11,15 @@ internal class YearValidationUtilSpec : BehaviorSpec({
     val invalidYear18xx = "1882"
     val invalidYear21xx = "2182"
     val invalidYearLetterInput = "asdf"
+    val invalidYearRange18xx21xx = "1899-2100"
     val validYear20xx = "2000"
     val validYear19xx = "1900"
+    val validYearRange19xx20xx = "1900-2099"
 
     given("Year validation call") {
         `when`("empty string as year ($emptyString)") {
-            then ("false returned") {
-                isYearValid(emptyString) shouldBe false
+            then ("true returned") {
+                isYearValid(emptyString) shouldBe true
             }
         }
         `when`("invalid year too short ($invalidYearTooShort)") {
@@ -45,6 +47,11 @@ internal class YearValidationUtilSpec : BehaviorSpec({
                 isYearValid(invalidYearLetterInput) shouldBe false
             }
         }
+        `when`("invalid year range 18xx-21xx ($invalidYearRange18xx21xx)") {
+            then ("false returned") {
+                isYearValid(invalidYearRange18xx21xx) shouldBe false
+            }
+        }
         `when`("valid year 19xx ($validYear19xx)") {
             then ("true returned") {
                 isYearValid(validYear19xx) shouldBe true
@@ -53,6 +60,11 @@ internal class YearValidationUtilSpec : BehaviorSpec({
         `when`("valid year 20xx ($validYear20xx)") {
             then ("true returned") {
                 isYearValid(validYear20xx) shouldBe true
+            }
+        }
+        `when`("valid year range 19xx-20xx ($validYearRange19xx20xx)") {
+            then ("true returned") {
+                isYearValid(validYearRange19xx20xx) shouldBe true
             }
         }
     }

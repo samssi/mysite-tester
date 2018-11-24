@@ -3,13 +3,13 @@ package com.samssi.mysite.authentication
 import com.github.kittinunf.fuel.core.Response
 import com.github.kittinunf.fuel.httpPost
 import com.google.gson.Gson
+import com.samssi.mysite.testcontainer.MysiteAuthTestContainer
 import com.samssi.mysite.util.JsonUtil
-import com.samssi.mysite.testcontainer.MysiteAuthContainerSpec
 import io.kotlintest.shouldBe
 import io.kotlintest.shouldNotBe
 import io.kotlintest.specs.BehaviorSpec
 
-val loginUrl = MysiteAuthContainerSpec.authUrl("/api/v1/auth/login")
+val loginUrl = MysiteAuthTestContainer.authUrl("/api/v1/auth/login")
 
 internal class AuthenticationSpec : BehaviorSpec({
     given("Login attempt") {

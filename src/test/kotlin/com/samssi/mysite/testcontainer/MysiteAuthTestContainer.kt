@@ -1,10 +1,10 @@
 package com.samssi.mysite.testcontainer
 
-import com.samssi.mysite.util.KGenericContainer
 import com.samssi.mysite.Settings
+import com.samssi.mysite.util.KGenericContainer
 import org.testcontainers.containers.GenericContainer
 
-internal object MysiteAuthContainerSpec {
+internal object MysiteAuthTestContainer {
     private const val mysiteAuthContainerUri = "mysite/mysite-auth"
     private const val mysiteAuthContainerPort = 8100
     internal val mysiteAuthContainer: GenericContainer<KGenericContainer>

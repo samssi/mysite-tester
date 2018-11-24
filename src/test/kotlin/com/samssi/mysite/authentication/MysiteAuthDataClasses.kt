@@ -20,6 +20,3 @@ data class Token(val token: String)
 data class Password(val password: String)
 data class PasswordAndSalt(val password: String, val salt: String)
 
-// Content classes
-data class Message(val message: String)
-

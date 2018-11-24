@@ -16,3 +16,6 @@ data class Address(val street: String, val zipcode: String, val city: String)
 
 data class Portfolio(val order: Int, val company: String, val assignments: List<Assignments>)
 data class Assignments(val year: String?, val paragraphs: List<Paragraphs>, val technologies: List<String>)
+
+// Error message class
+data class Message(val message: String)

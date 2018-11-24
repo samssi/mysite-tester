@@ -34,4 +34,9 @@ internal object ValidationUtil {
         val regex = ".*(png)".toRegex()
         return regex.matches(picture)
     }
+
+    internal fun isZipCodeValid(zipCode: String): Boolean {
+        val regex = "([0-9]{5})".toRegex()
+        return regex.matches(zipCode)
+    }
 }

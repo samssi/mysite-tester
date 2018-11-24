@@ -2,7 +2,6 @@ package com.samssi.mysite.content
 
 import com.github.kittinunf.fuel.core.Response
 import com.github.kittinunf.fuel.httpGet
-import com.samssi.mysite.authentication.Message
 import com.samssi.mysite.authentication.postAuth
 import com.samssi.mysite.authentication.usernameCorrectPasswordCorrectForFoobar
 import com.samssi.mysite.testcontainer.MysiteRestTestContainer

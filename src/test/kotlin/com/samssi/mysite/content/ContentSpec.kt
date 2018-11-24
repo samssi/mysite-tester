@@ -9,8 +9,10 @@ import com.samssi.mysite.testcontainer.MysiteRestTestContainer
 import com.samssi.mysite.util.JsonUtil.jsonResponseAsType
 import com.samssi.mysite.util.ValidationUtil.isOrderValid
 import com.samssi.mysite.util.ValidationUtil.isPhoneNumberValid
+import com.samssi.mysite.util.ValidationUtil.isPictureFormatValid
 import com.samssi.mysite.util.ValidationUtil.isUrlValid
 import com.samssi.mysite.util.ValidationUtil.isYearValid
+import com.samssi.mysite.util.ValidationUtil.isZipCodeValid
 import io.kotlintest.matchers.numerics.shouldBeGreaterThan
 import io.kotlintest.matchers.numerics.shouldBeGreaterThanOrEqual
 import io.kotlintest.shouldBe
@@ -77,12 +79,10 @@ internal class ContentSpec : BehaviorSpec({
                 personalInfo.name.length shouldBeGreaterThan 0
                 isPhoneNumberValid(personalInfo.phoneNumber) shouldBe true
                 personalInfo.applicationDate.length shouldBeGreaterThan 0
-                // TODO:
-                //isAllowedPictureFormat(personalInfo.picture) shouldEqual true
+                isPictureFormatValid(personalInfo.picture) shouldBe true
                 personalInfo.address.city.length shouldBeGreaterThan 0
                 personalInfo.address.street.length shouldBeGreaterThan 0
-                // TODO:
-                //isZipCode(personalInfo.address.zipcode) shouldEqual true
+                isZipCodeValid(personalInfo.address.zipcode) shouldBe true
             }
         }
 

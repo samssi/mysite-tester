@@ -26,7 +26,6 @@ internal class PrivateContentSpec: BehaviorSpec({
                 assertDocumentHttpCallForbidden(documents)
             }
         }
-        // TODO: bad request from backend?
         `when`("invalid token in header") {
             then("""Forbidden(403) and message "No token provided."""") {
                 assertDocumentHttpCallForbiddenWithInvalidToken(documents)

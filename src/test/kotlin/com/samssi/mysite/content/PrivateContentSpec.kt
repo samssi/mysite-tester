@@ -18,8 +18,9 @@ import io.kotlintest.matchers.numerics.shouldBeGreaterThanOrEqual
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.BehaviorSpec
 
-internal class ContentSpec : BehaviorSpec({
+internal class PrivateContentSpec: BehaviorSpec({
     val documents = listOf("application", "about", "personal", "experience", "portfolio", "about")
+
     given("User calls for any content api private route") {
         `when`("no token in header") {
             then("""Forbidden(403) and message "No token provided."""") {

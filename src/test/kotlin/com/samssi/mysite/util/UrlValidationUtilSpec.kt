@@ -28,12 +28,12 @@ internal class UrlValidationUtilSpec : BehaviorSpec({
             }
         }
         `when`("url with https protocol as url ($urlWithHttpsProtocol)") {
-            then ("false returned") {
+            then ("true returned") {
                 isUrlValid(urlWithHttpsProtocol) shouldBe true
             }
         }
         `when`("url with protocol and dash as url ($urlWithProtocolAndDash)") {
-            then ("false returned") {
+            then ("true returned") {
                 isUrlValid(urlWithProtocolAndDash) shouldBe true
             }
         }

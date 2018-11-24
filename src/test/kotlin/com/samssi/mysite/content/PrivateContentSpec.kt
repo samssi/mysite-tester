@@ -6,6 +6,7 @@ import com.samssi.mysite.authentication.postAuth
 import com.samssi.mysite.authentication.usernameCorrectPasswordCorrectForFoobar
 import com.samssi.mysite.testcontainer.MysiteRestTestContainer
 import com.samssi.mysite.util.JsonUtil.jsonResponseAsType
+import com.samssi.mysite.util.JwtFixture.expiredSecretSignedJwtToken
 import com.samssi.mysite.util.JwtFixture.faultySecretSignedJwtToken
 import com.samssi.mysite.util.ValidationUtil.isOrderValid
 import com.samssi.mysite.util.ValidationUtil.isPhoneNumberValid
@@ -30,6 +31,11 @@ internal class PrivateContentSpec: BehaviorSpec({
         `when`("invalid token in header") {
             then("""Forbidden(403) and message "No token provided."""") {
                 assertDocumentHttpCallForbiddenWithInvalidToken(documents)
+            }
+        }
+        `when`("expired token in header") {
+            then("""Unauthorized(401) and message "Token expired."""") {
+                assertDocumentHttpCallForbiddenWithExpiredToken(documents)
             }
         }
     }
@@ -176,10 +182,28 @@ internal fun assertDocumentHttpCallForbiddenWithInvalidToken(documents: List<Str
     }
 }
 
+internal fun assertDocumentHttpCallForbiddenWithExpiredToken(documents: List<String>) {
+    documents.forEach {document ->
+        val response = expiredTokenContentGet(document)
+        val message = jsonResponseAsType<Message>(response)
+
+        response.statusCode shouldBe 401
+        message.message shouldBe "Token expired."
+    }
+}
+
 internal fun invalidTokenContentGet(document: String): Response {
     val (_, response, _) = documentUrl(document)
         .httpGet()
         .header("Authorization" to faultySecretSignedJwtToken())
+        .response()
+    return response
+}
+
+internal fun expiredTokenContentGet(document: String): Response {
+    val (_, response, _) = documentUrl(document)
+        .httpGet()
+        .header("Authorization" to expiredSecretSignedJwtToken())
         .response()
     return response
 }

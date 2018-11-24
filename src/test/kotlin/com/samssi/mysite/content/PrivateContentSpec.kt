@@ -171,8 +171,7 @@ internal fun assertDocumentHttpCallForbiddenWithInvalidToken(documents: List<Str
         val message = jsonResponseAsType<Message>(response)
 
         response.statusCode shouldBe 403
-        // TODO: fix to backend authenticate --> authorize
-        message.message shouldBe "Failed to authenticate token."
+        message.message shouldBe "Failed to authorize token."
     }
 }
 

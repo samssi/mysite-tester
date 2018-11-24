@@ -1,13 +1,13 @@
 package com.samssi.mysite.testcontainer
 
-import com.samssi.mysite.util.KGenericContainer
 import com.samssi.mysite.Settings
+import com.samssi.mysite.util.KGenericContainer
 import org.testcontainers.containers.GenericContainer
 
 internal object MysiteRestTestContainer {
     private const val mysiteRestContainerUri = "mysite/mysite-rest"
     private const val mysiteRestContainerPort = 8090
-    internal val mysiteRestContainer: GenericContainer<KGenericContainer>
+    private val mysiteRestContainer: GenericContainer<KGenericContainer>
 
     init {
         mysiteRestContainer = GenericContainer(mysiteRestContainerUri)

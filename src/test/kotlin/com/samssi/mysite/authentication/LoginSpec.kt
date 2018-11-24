@@ -75,17 +75,17 @@ internal class AuthenticationSpec : BehaviorSpec({
     }
 })
 
-fun assertAuthorized(response: Response, token: String) {
+internal fun assertAuthorized(response: Response, token: String) {
     response.statusCode shouldBe 200
     token shouldNotBe ""
 }
 
-fun assertUnauthorized(response: Response, token: String) {
+internal fun assertUnauthorized(response: Response, token: String) {
     response.statusCode shouldBe 401
     token shouldBe ""
 }
 
-fun postAuth(login: Login): Pair<Response, String> {
+internal fun postAuth(login: Login): Pair<Response, String> {
     val (_, response, _) = loginUrl.httpPost().jsonBody(Gson().toJson(login)).response()
     val token = JsonUtil.jsonResponseAsType<Token>(response).token
     return Pair(response, token)

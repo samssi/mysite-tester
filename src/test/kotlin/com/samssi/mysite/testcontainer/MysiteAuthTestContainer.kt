@@ -7,7 +7,7 @@ import org.testcontainers.containers.GenericContainer
 internal object MysiteAuthTestContainer {
     private const val mysiteAuthContainerUri = "mysite/mysite-auth"
     private const val mysiteAuthContainerPort = 8100
-    internal val mysiteAuthContainer: GenericContainer<KGenericContainer>
+    private val mysiteAuthContainer: GenericContainer<KGenericContainer>
 
     init {
         mysiteAuthContainer = GenericContainer(mysiteAuthContainerUri)

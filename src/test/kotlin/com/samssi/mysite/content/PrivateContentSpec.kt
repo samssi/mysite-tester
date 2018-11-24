@@ -123,7 +123,7 @@ internal class PrivateContentSpec: BehaviorSpec({
 })
 
 
-fun checkAssignments(assignments: List<Assignments>) {
+internal fun checkAssignments(assignments: List<Assignments>) {
     assignments.forEach {assignment ->
         isYearValid(assignment.year.orEmpty()) shouldBe true
         assignment.technologies.forEach {technology ->
@@ -135,7 +135,7 @@ fun checkAssignments(assignments: List<Assignments>) {
     }
 }
 
-fun authorizedContentGet(url: String): Response {
+internal fun authorizedContentGet(url: String): Response {
     val (_, response, _) = url
         .httpGet()
         .header("Authorization" to validTokenFromAuthService())
@@ -143,20 +143,21 @@ fun authorizedContentGet(url: String): Response {
     return response
 }
 
-fun contentApiDocumentDescriptionText(document: String): String {
+internal fun contentApiDocumentDescriptionText(document: String): String {
     return "content api responds to the user request for document: $document"
 }
 
-fun documentUrl(document: String): String {
+internal fun documentUrl(document: String): String {
     val contentUrl = MysiteRestTestContainer.contentUrl("/api/v1/content/private/contents")
     return "$contentUrl/$document"
 }
 
-fun validTokenFromAuthService(): String {
+internal fun validTokenFromAuthService(): String {
     val (_, token) = postAuth(usernameCorrectPasswordCorrectForFoobar)
     return token
 }
-fun assertDocumentHttpCallForbidden(documents: List<String>) {
+
+internal fun assertDocumentHttpCallForbidden(documents: List<String>) {
     documents.forEach {document ->
         val response = unauthorizedContentGet(document)
         val message = jsonResponseAsType<Message>(response)
@@ -166,7 +167,7 @@ fun assertDocumentHttpCallForbidden(documents: List<String>) {
     }
 }
 
-fun assertDocumentHttpCallForbiddenWithInvalidToken(documents: List<String>) {
+internal fun assertDocumentHttpCallForbiddenWithInvalidToken(documents: List<String>) {
     documents.forEach {document ->
         val response = invalidTokenContentGet(document)
         val message = jsonResponseAsType<Message>(response)
@@ -177,7 +178,7 @@ fun assertDocumentHttpCallForbiddenWithInvalidToken(documents: List<String>) {
     }
 }
 
-fun invalidTokenContentGet(document: String): Response {
+internal fun invalidTokenContentGet(document: String): Response {
     // TODO: signature is verified not the jwt content. Create own jwt and sign it with invalid secret
     val (_, response, _) = documentUrl(document)
         .httpGet()
@@ -186,7 +187,7 @@ fun invalidTokenContentGet(document: String): Response {
     return response
 }
 
-fun unauthorizedContentGet(document: String): Response {
+internal fun unauthorizedContentGet(document: String): Response {
     val (_, response, _) = documentUrl(document).httpGet().response()
     return response
 }

@@ -29,4 +29,9 @@ internal object ValidationUtil {
         val regex = "(^\$|[1,2][0,9][0-9]{2}-[1,2][0,9][0-9]{2}|[1,2][0,9][0-9]{2})".toRegex()
         return regex.matches(year)
     }
+
+    internal fun isPictureFormatValid(picture: String): Boolean {
+        val regex = ".*(png)".toRegex()
+        return regex.matches(picture)
+    }
 }

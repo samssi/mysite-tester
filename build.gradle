@@ -19,6 +19,7 @@ dependencies {
     compile 'com.github.kittinunf.fuel:fuel-coroutines:1.15.1'
     compile 'com.github.kittinunf.fuel:fuel:1.15.1'
     compile 'org.testcontainers:testcontainers:1.9.1'
+    compile 'com.auth0:java-jwt:3.4.1'
     testCompile 'io.kotlintest:kotlintest-runner-junit5:3.1.10'
 }
 apply plugin: "kotlin"

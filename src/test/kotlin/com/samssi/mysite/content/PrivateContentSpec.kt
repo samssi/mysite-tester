@@ -6,6 +6,7 @@ import com.samssi.mysite.authentication.postAuth
 import com.samssi.mysite.authentication.usernameCorrectPasswordCorrectForFoobar
 import com.samssi.mysite.testcontainer.MysiteRestTestContainer
 import com.samssi.mysite.util.JsonUtil.jsonResponseAsType
+import com.samssi.mysite.util.JwtFixture.faultySecretSignedJwtToken
 import com.samssi.mysite.util.ValidationUtil.isOrderValid
 import com.samssi.mysite.util.ValidationUtil.isPhoneNumberValid
 import com.samssi.mysite.util.ValidationUtil.isPictureFormatValid
@@ -176,10 +177,9 @@ internal fun assertDocumentHttpCallForbiddenWithInvalidToken(documents: List<Str
 }
 
 internal fun invalidTokenContentGet(document: String): Response {
-    // TODO: signature is verified not the jwt content. Create own jwt and sign it with invalid secret
     val (_, response, _) = documentUrl(document)
         .httpGet()
-        .header("Authorization" to "INVALID_TOKEN")
+        .header("Authorization" to faultySecretSignedJwtToken())
         .response()
     return response
 }
